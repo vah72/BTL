@@ -7,3 +7,7 @@ https://espressif.github.io/arduino-esp32/package_esp32_index.json
 ** CODE HARDWARE WEATHER STATION IN ARDUINO
 1. Add libs in folder libs to C:../Documents/Arduino/libraries
 2. Choose board Arduino Uno
+
+** INSTALL LIBRARY DJANGO
+pip install django-extensions
+pip install apscheduler
