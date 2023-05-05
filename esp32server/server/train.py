@@ -16,7 +16,8 @@ def train_model(temp, pressure, wind_speed, direction, humid):
         10: 'Light Rain'
     }
     model = load_model('weather_model.h5')
-    predicted_class = model.predict([[temp, pressure, wind_speed, direction, humid]])
+    predict = model.predict([[float(temp), float(pressure), float(wind_speed), float(direction), float(humid)]])
+    predicted_class = np.argmax(predict)
     predicted_class_name = label_names[predicted_class]
     print('Lớp đích được dự đoán là:', predicted_class_name)
     return predicted_class_name
