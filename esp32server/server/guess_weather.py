@@ -7,9 +7,6 @@ import threading
 from datetime import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-guess = ""
-date = ""
-
 def guess_weather():
     response = requests.get("https://api.thingspeak.com/channels/2126333/feeds.json?results=2")
     # print(response.json()["feeds"])
@@ -36,16 +33,19 @@ def send_weather_email():
 
 def run_guess_scheduler():
     guess_scheduler = BlockingScheduler()
-    guess_scheduler.add_job(guess_weather,'interval', minutes=2 )
+    guess_scheduler.add_job(guess_weather,'interval', seconds=30 )
     guess_scheduler.start()
 
 def run_email_scheduler():
     email_scheduler = BlockingScheduler()
-    email_scheduler.add_job(send_weather_email, 'cron', hour=14, minute=24, second=0, timezone='Asia/Ho_Chi_Minh')
+    email_scheduler.add_job(send_weather_email, 'cron', hour=14, minute=36, second=0, timezone='Asia/Ho_Chi_Minh')
     email_scheduler.start()
 
 
 if __name__ == '__main__':
+    guess = ""
+    date = ""
+
     guess_thread = threading.Thread(target=run_guess_scheduler)
     email_thread = threading.Thread(target=run_email_scheduler)
 

@@ -7,8 +7,9 @@ import pandas as pd
 def send_data(request):
     resp ={}
     res_data = ""
-    df = pd.read_csv('data.csv')
-    res_data =df.tail(1)
+    df = pd.read_csv('data.csv', names=['date', 'temp', 'pressure', 'wind_speed', 'rain', 'direction', 'humid', 'guess'])
+    res_data =df.tail(1).to_dict('records')
+    print(res_data)
     if request.method == 'GET':
         resp['status'] = 'Success'
         resp['status_code'] = '200'
