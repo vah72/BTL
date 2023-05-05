@@ -23,7 +23,7 @@ def guess_weather():
     vn_time = utc_time.replace(tzinfo=pytz.utc).astimezone(pytz.timezone('Asia/Ho_Chi_Minh'))
     date = datetime.strftime(vn_time, "%d-%m-%Y %H:%M:%S" )
     #train chỉ truyền vào temp, pressure, wind_speed, direction, humid
-    guess = train_model()
+    guess = train_model(temp, pressure, wind_speed, direction, humid)
     print(date, temp, pressure, wind_speed, rain, direction, humid, guess)
     with open('data.csv', 'r+') as f:
         f.writelines(f'{date},{temp},{pressure},{wind_speed},{rain},{direction},{humid},{guess}')
